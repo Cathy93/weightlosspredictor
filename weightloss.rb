@@ -9,7 +9,8 @@
 #7700 CALORIES PER KILO OF FAT
 
 
-def user_input
+
+
 
 puts "What is your height in cm?"
 height = gets.chomp.to_i
@@ -19,21 +20,8 @@ weight = gets.chomp.to_i
 
 puts "How old are you"
 age = gets.chomp.to_i
-end
-def gender
-puts "Are You Male or Female?"
-gender = gets.chomp.downcase
-if gender == "male"
-    cals = (88.362 + (4.799 * height) + (13.397 * weight) - (5.677 * age))
-elsif gender == "female"
-    cals = (447.593 + (3.098 * height) + (9.247 * weight ) - (4.33 * age))
-else
-  puts "please try again"
-  user_input
-end
-end
 
-def activity
+
 puts "What is you activity level? 1:Sedentary 2:Light 3:Moderate 4:Heavy"
 activity = gets.chomp
 if activity == "1"
@@ -47,30 +35,35 @@ elsif activity =="4"
 else
   puts "Please try again"
 end
+
+puts "Are You Male or Female?"
+gender = gets.chomp.downcase
+if gender == "male"
+    cals = (88.362 + (4.799 * height) + (13.397 * weight) - (5.677 * age))
+elsif gender == "female"
+    cals = (447.593 + (3.098 * height) + (9.247 * weight ) - (4.33 * age))
+else
+  puts "please try again"
+  user_input
 end
 
-def metabolic
+
 rmr = cals * work
 puts "Your Resting metabolic rate is #{rmr}. Consume less than this to lose weight. "
-end
 
-def intake
+
 puts "How many calories have you eaten today?"
 daycals = gets.chomp.to_i
-end
 
-def output
-  dayloss = rmr -daycals
-  weightloss = dayloss * (1/7700)
+
+  dayloss = rmr - daycals
+  calskg = 1/7700.to_f
+  weightloss = dayloss * calskg
   endweight = weight - weightloss
-  weekweight = endweight * 7
-  monthweight = weekweight * 4.2
-puts "You should be #{endweight} by the end of today. If every day was like today you will be #{weekweight} in one week and #{monthweight} in one month."
-end
+  week = weightloss * 7
+  weekweight = weight - week
+  month = weightloss * 31
+  monthweight = weight - month
 
-user_input
-gender
-activity
-metabolic
-intake
-output
+
+puts "You should be #{endweight.round(2)}kg by the end of today. If every day was like today you will be #{weekweight.round(2)}kg in one week and #{monthweight.round(2)}kg in one month."
